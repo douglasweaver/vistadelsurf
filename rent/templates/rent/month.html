@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+
+
+  <style>
+	.novacancy { background: white !important; position: relative;}
+		.novacancy a { background: MistyRose !important; color: black !important;}
+		.novacancy a.ui-state-active { background: MistyRose; color: black !important; }
+
+
+	.vacancy { background: white !important; position: relative;}
+		.vacancy a { background: GreenYellow !important; color: black !important;}
+		.vacancy a .ui-state-active { background: GreenYellow; color: black !important; }
+
+		.vacancy:hover:after {
+			background: #333;
+			background: rgba(0,0,0,.8);
+			border-radius: 5px;
+			bottom: 26px;
+			color: #fff;
+			content: attr(title);
+			left: 20%;
+			padding: 5px 5px;
+			position: absolute;
+			z-index: 98;
+			min-width: 5px;
+			width: auto;
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		.vacancy:hover:before {
+			border: solid;
+			border-color: #333 transparent;
+			border-width: 6px 6px 0 6px;
+			content: "";
+			left: 50%;
+			position: absolute;
+			z-index: 99;
+		}
+
+	.premvacancy { background: white !important; position: relative;}
+		.premvacancy a { background: DarkGreen !important; color: white !important;}
+		.premvacancy a .ui-state-active { background: DarkGreen; color: white !important; }
+
+		.premvacancy:hover:after {
+			background: #333;
+			background: rgba(0,0,0,.8);
+			border-radius: 5px;
+			bottom: 26px;
+			color: #fff;
+			content: attr(title);
+			left: 20%;
+			padding: 5px 5px;
+			position: absolute;
+			z-index: 98;
+			min-width: 5px;
+			width: auto;
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		.premvacancy:hover:before {
+			border: solid;
+			border-color: #333 transparent;
+			border-width: 6px 6px 0 6px;
+			content: "";
+			left: 50%;
+			position: absolute;
+			z-index: 99;
+		}
+
+
+
+  </style>
+
+
+  <script>
+  $(function() {
+  	$( "#from" ).datepicker({
+  		minDate: 0,
+	  	beforeShowDay: SetDayStyle,
+	  	defaultDate: "",
+	  	changeMonth: false,
+	  	numberOfMonths: 3,
+	  	onClose: function( selectedDate ) {
+	  		if (selectedDate) {$( "#to" ).datepicker( "option", "minDate", selectedDate );}
+	  	}
+	  });
+	  $( "#to" ).datepicker({
+	  	minDate: 0,
+	  	beforeShowDay: SetDayStyle,
+	  	defaultDate: "",
+	  	changeMonth: false,
+	  	numberOfMonths: 3,
+	  	onClose: function( selectedDate ) {
+	  		if (selectedDate) {$( "#from" ).datepicker( "option", "maxDate", selectedDate );}
+	  	}
+	  });
+
+
+
+    function SetDayStyle(date) {
+
+    	var enabled = true;
+    	var dssdates = {{ dcssdates|safe }}
+    	var ttips = {{ datesrates|safe }}
+    	var toolTip = {{ baserate|safe }}
+    	var cssvacancy = "vacancy";
+    	for (var i = 0; i < dssdates.length; i++) 
+    	{
+			if (new Date(dssdates[i]).toLocaleDateString() == date.toLocaleDateString()) 
+			{ 
+        		enabled = false;
+        		toolTip = "";
+        		cssvacancy = "novacancy"; 
+        		break;
+        	}
+    	}
+
+    	for (var key in ttips) 
+    	{
+    		if (new Date(key).toLocaleDateString() == date.toLocaleDateString()) 
+			{ 
+        		toolTip = ttips[key];
+        		cssvacancy = "premvacancy"; 
+        		break;
+        	}
+    	}
+
+    	return new Array(enabled, cssvacancy, toolTip);
+	}
+});
+  </script>
+</head>
+<body>
+ 
+<label for="from">From</label>
+<input type="text" id="from" name="from">
+<label for="to">to</label>
+<input type="text" id="to" name="to"> 
+ 
+</body>
+</html>

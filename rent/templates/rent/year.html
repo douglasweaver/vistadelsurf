@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'rent/style.css' %}"/>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+</head>
+
+<script>
+	var datepicker_reservation_available_rates = 
+		{{ datepicker_reservation_available_rates|safe }}
+</script>
+<script type="text/javascript" src="{% static 'rent/datepicker_reservations.js' %}"></script>
+
+<div class="property">
+<div id="banner"></div>
+<br><br>
+
+<div id="description">
+<h3 id="vistadelsurf">VISTA DEL SURF PROPERTY DESCRIPTION</h3> 
+<div id="leftdescription">
+	LEFT LEFT LEFT
+	<br>
+	LEFT LEFT
+</div>
+<div id="rightdescription">
+RIGHT RIGHT RIGHT RIGHT
+	<br>
+	<br>
+	<br>
+RIGHT RIGHT
+	<br>
+RIGHT
+</div>
+<br style="clear:both;"/>
+<h3 id="vistadelsurf">VISTA DEL SURF PROPERTY BOTTOM OF DESCRIPTION</h3> 
+</div>
+<div id="photos">
+    <ul id="slideshow">
+      <li><img src="{% static 'rent/images/sign.jpg' %}" width="250" height="250" alt="Slide 1" /></li>
+      <li><img src="{% static 'rent/images/patio.jpeg' %}" width="125" height="250" alt="Slide 2" /></li>
+      <li><img src="{% static 'rent/images/pool.jpg' %}" width="175" height="250" alt="Slide 3" /></li>
+      <li><img src="{% static 'rent/images/mancave.jpg' %}" width="200" height="250" alt="Slide 4" /></li>
+      <li><img src="{% static 'rent/images/waves.jpg' %}" width="200" height="250" alt="Slide 5" /></li>
+      <li><img src="{% static 'rent/images/sign.jpg' %}" width="250" height="250" alt="Slide 6" /></li>
+      <li><img src="{% static 'rent/images/patio.jpeg' %}" width="125" height="250" alt="Slide 7" /></li>
+      <li><img src="{% static 'rent/images/pool.jpg' %}" width="175" height="250" alt="Slide 8" /></li>
+      <li><img src="{% static 'rent/images/mancave.jpg' %}" width="200" height="250" alt="Slide 9" /></li>
+    </ul>
+
+<script type="text/javascript" src="{% static 'rent/jquery.stepScroll.js' %}"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#slideshow").stepScroll({
+			scroll: 1500,
+			delay: 2000,
+			opacity: 1.0
+		});
+	});
+</script>
+</div>
+
+
+<div id="contact">
+<form action="" method="POST">
+<h3 id="vistadelsurf">VISTA DEL SURF INQUIRY</h3> 
+{% csrf_token %}
+{% for field in form %}
+	<p id="contacterror"> {{ field.errors }} </p>
+{% endfor %}
+<div id="leftcontact">
+<label>{{ form.start_date.label_tag }}</label> {{ form.start_date }}</br></br>
+<label>{{ form.couples.label_tag }}</label> {{ form.couples }}</br></br>
+<label>{{ form.adults.label_tag }}</label> {{ form.adults }}</br></br>
+<label>{{ form.children.label_tag }}</label> {{ form.children }}</br></br>
+<label>{{ form.sender.label_tag }}</label> {{ form.sender }}</br></br>
+</div>
+<div id="rightcontact">
+<label>{{ form.end_date.label_tag }}</label> {{ form.end_date }}</br></br>
+<label>{{ form.message.label_tag }}</label> {{ form.message }}</br></br>
+</div>
+<br style="clear:both;"/>
+<input class="btn" type="submit" name="submit" value="INQUIRE">
+</form>
+</div>
+
+</div>
+</html>

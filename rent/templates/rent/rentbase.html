@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<style type="text/css">
+html {background: url("{% static 'rent/mancave.jpg' %}")) no-repeat center;
+  min-height:100%;
+  background-size:cover;
+  background-attachment: fixed;
+}
+</style>
+  <body>
+    <h1>VISTA DEL SURF</h1>
+    <!-- Calendar reminders-->
+    {% if reminders %}
+    <div class="reminders">
+        <div class="gr">Alerts</div>
+        {% for reminder in reminders %}<p> {{ reminder.short|safe }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Content -->
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+    <!-- END Content -->
+</html>
+
+<!-- 'http://i375.photobucket.com/albums/oo197/Charles-Stanton_151515/5--603810-Green%20Grass%20On%20White%20Background.%20Matte%20Channel._zps7qmers9d.jpg') no-repeat center;
+  min-height:100%;
+  background-size:cover} -->
+
+  </body>

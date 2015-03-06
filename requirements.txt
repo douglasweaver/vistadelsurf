@@ -1,0 +1,10 @@
+Django==1.7.5
+Pillow==2.7.0
+PyYAML==3.11
+awsebcli==3.1.2
+cement==2.4.0
+django-jquery==1.9.1
+jmespath==0.6.1
+psycopg2==2.6
+python-dateutil==2.4.1
+six==1.9.0
